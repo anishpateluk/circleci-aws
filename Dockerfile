@@ -11,5 +11,3 @@ RUN apt-get update && \
     pip install --upgrade awsebcli==$AWSEBCLI_VERSION
 
 USER circleci
-
-RUN aws --version && eb --version
