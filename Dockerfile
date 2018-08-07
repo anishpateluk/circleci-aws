@@ -1,7 +1,26 @@
-FROM circleci/python:2.7-jessie
+FROM alpine
 
-ENV AWSCLI_VERSION=1.15.72
+RUN apk --no-cache add \
+        bash \
+        less \
+        groff \
+        jq \
+        git \
+        curl \
+        python \
+        py-pip
 
-RUN sudo -H pip install awscli==$AWSCLI_VERSION
+RUN pip install --upgrade pip \
+        awbcli==$AWSCLI_VERSION \
+        awsebcli==$AWSEBCLI_VERSION
+
+RUN curl -L https://github.com/barnybug/cli53/releases/download/0.8.7/cli53-linux-386 > /usr/bin/cli53 && \
+    chmod +x /usr/bin/cli53
+
+ENV PAGER="less"
+
+# Expose credentials volume
+RUN mkdir ~/.aws
 
 RUN aws --version
+RUN eb --version
