@@ -1,4 +1,4 @@
-FROM alpine
+FROM circleci/buildpack-deps
 
 RUN apk --no-cache add \
         bash \
@@ -11,7 +11,7 @@ RUN apk --no-cache add \
         py-pip
 
 RUN pip install --upgrade pip \
-        awbcli==$AWSCLI_VERSION \
+        awscli==$AWSCLI_VERSION \
         awsebcli==$AWSEBCLI_VERSION
 
 RUN curl -L https://github.com/barnybug/cli53/releases/download/0.8.7/cli53-linux-386 > /usr/bin/cli53 && \
