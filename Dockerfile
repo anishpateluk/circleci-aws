@@ -1,12 +1,11 @@
 FROM circleci/buildpack-deps
 
-RUN apk --no-cache add \
+RUN apt-get update; \
+	apt-get install -y --no-install-recommends \
         bash \
         less \
         groff \
         jq \
-        git \
-        curl \
         python \
         py-pip
 
